@@ -1,0 +1,537 @@
+<!-- <?php
+ include("connection.php");
+
+
+session_start();  // Start PHP session to access session variables
+
+// Check if the username session variable is set
+if(isset($_SESSION['username'])){
+     $username = $_SESSION['username'];
+//     // echo "Welcome"." ".$username;
+ } 
+ else {
+    // Redirect to login page if session variable is not set (user not logged in)
+    // header("Location: login.php");
+    header("Location: signup.php");
+    exit();
+}
+?> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Eminent World</title>
+   <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    border-radius: 100px;
+}
+   .bg{
+    background-image: url(https://images.pexels.com/photos/247478/pexels-photo-247478.jpeg?cs=srgb&dl=dawn-landscape-mountains-247478.jpg&fm=jpg);
+    background-size: cover;
+    height: 95vh;
+    z-index: 0;
+   }
+   .box-1{
+    text-align: center;
+    color: white;
+    font-size: 75px;
+    padding-top: 175px;
+ 
+   }
+a{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+.btn {
+    padding: 16px 36px;
+    color: orange;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: xx-large;
+    font-weight: 500;
+}
+.btn:hover{
+    color: orange;
+    background-color: white;
+    cursor: pointer;
+}
+.sub-box{
+    display: block;
+    border:1px solid white;
+    width:100%;
+}
+.container2{
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+
+}
+img{
+  padding: 25px;
+  border-radius: 50px;
+  clear: right;
+}
+.image{
+ width:35%;
+}
+.text{
+    width: 65%;
+    padding: 24px 65px;
+
+}
+.sub-heading{
+    text-align: center;
+    font-size: xxx-large;
+    padding-bottom: 10px 
+}
+p{
+    font-size: 22px;
+font-weight: 500;
+}
+.three{
+    padding-top:25px;
+}
+
+.main-nav{
+            background-color: black;
+            padding: 10px;
+        }
+     .bx{
+        width: 150px;
+      
+     }
+     .one{
+        padding: 2px 53px;
+    font-size: 33px;
+    font-weight: 500;
+    color: white;
+}
+     .two{
+        font-size: 20px;
+        color: white;
+     }
+     .btn-small{
+        padding: 5px 28px;
+    font-size: 18px;
+    background-color: #F44336;
+    border: #F44336;
+    border-radius: 5px;
+    font-weight: bold;
+     }
+   
+  /* Sign Up Modal Code */
+     
+        .sign-form{
+         
+          width: 500px;
+          padding:54px;
+          background-color: whitesmoke;
+          position: absolute;
+          top: -50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          box-shadow: 0px 0px 10px 3px #ccc;
+          transition: 2s;
+        }
+        .showloginform-new{
+            top: 50%;
+        }
+        .sign-form input{
+            font-size: 20px;
+            width: 100%;
+            height: 35px;
+            /* margin: 10px,10px; */
+            margin-bottom: 10px;
+           
+        }
+
+        .sign-form input[type=submit]{
+            
+            width: 100%;
+            height: 35px;
+            margin-bottom: 10px;
+            background-color: rgb(96, 96, 213);
+            color: white;
+            border: none;
+            cursor: pointer;
+            
+        }
+        .sign-form input[type=submit]:hover{
+            width: 100%;
+            padding: 0px;
+            height: 35px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+.top{
+    margin-top: 20px;
+}
+
+     /* Login Modal code */
+
+     .overlay{
+            width: 100%;
+            position: fixed;
+            top: 0%;
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 100vh;
+            z-index: 1;
+            opacity: 0;
+            transition: 1s;
+        }
+        .showoverlay{
+            opacity: 1;
+            z-index: 1;
+        }
+     
+        .login-form{
+         
+          width: 350px;
+          padding:54px;
+          background-color: whitesmoke;
+          position: absolute;
+          top: -50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          box-shadow: 0px 0px 10px 3px #ccc;
+          transition: 1s;
+       
+        }
+        .showloginform{
+            top: 50%;
+        }
+        .login-form input{
+            font-size: 20px;
+            width: 100%;
+            height: 35px;
+            margin-bottom: 10px;
+           
+        }
+        .login-form input[type=submit]{
+            
+            width: 100%;
+            height: 35px;
+            margin-bottom: 10px;
+            background-color: rgb(96, 96, 213);
+            color: white;
+            border: none;
+            cursor: pointer;
+            
+        }
+        .login-form input[type=submit]:hover{
+            width: 100%;
+            padding: 0px;
+            height: 35px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        .heading
+        {
+            text-align: center;
+        }
+        .name{
+            font-size: 33px;
+            color: whitesmoke;
+            padding: 21px 11px;
+        }
+        #account-dropdown{
+            padding: 7px;
+    font-size: 13px;
+    color: white;
+    background: black;
+    font-weight: 700;
+}
+#account-dropdown option{
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+}
+.p-button{
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    display: flex;
+
+    width: 70%;
+    padding: 10px;
+    margin-top: 22px;
+    background: black;
+    color: white;
+    font-weight: 900;
+    font-size: 23px
+}
+        .span1{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            background-color: green;
+            padding: 3px 7px;
+            font-weight: bold;
+            color: white;
+        }
+        .span2{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            background-color: green;
+            padding: 3px 7px;
+            font-weight: bold;
+            color: white;
+        }
+   </style>
+</head>
+
+<body>
+<table width="100%" cellspacing="0px" cellpadding="30px" class="main-nav">
+    <tr>
+        <td>
+            <table cellspacing="0px" cellpadding="10px" width="100%">
+                <tr>
+                    <td class="nav one">Pinnacle</td>
+                    <td  class= " nav two" align="right" >
+                        Already registered? <button class="btn-small " onclick="showModal()">Login</button>
+                    </td>
+                    <td class= "nav two" align="right">
+                        Account: <strong><?php echo $username; ?></strong>
+                    </td>
+                    <!-- <td class="nav two" align="right">
+                       
+                        <select id="account-dropdown">
+                            <option value="account">Account</option>
+                            <option value=""><?php echo $username; ?></option>
+                            <option value="">Logout</option>
+                        </select>
+                    </td> -->
+                    
+                    <td class= " nav two bx" align="right">About Us</td>
+                    <td  class= " nav two bx" align="right" >Contact Us</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<!--Sign Up Modal -->
+
+ <div class="sign-form">
+    <form name="signupForm" action="signup_process.php"  method="post" onsubmit="return validateForm()">
+        <span class="span2">&times</span>
+        <div class="heading">
+           <h1>Sign Up</h1>
+        </div>
+        
+        <div>
+            <label for="username">Username</label>
+            <input type="text" name="username">
+        </div>
+        <div>
+        <label for="Email">Email Id</label>
+        <input type="Email" class="Email"  name="email">
+    </div> 
+    <div>
+        <label for="Password">Password</label>
+        <input type="password" class="passoword" name="password">
+    </div>
+    <br>
+    <div>
+      <input type="submit" value="Sign Up" name="signup" >
+
+    </div>
+      
+ 
+    </form>
+</div>
+
+
+
+<!-- LoginModal code -->
+
+<div class="login-form">
+    <form action="signin.php" method="POST" >
+        <span class="span1">&times</span>
+        <div class="heading">
+           <h1>LOGIN</h1>
+        </div>
+        
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="user"  autocomplete="off" required>
+        </div>
+        <div>
+        <label for="Password">Password</label>
+        <input type="password" class="password" id="password" name="pass" autocomplete="off" required>
+    </div><br>
+    <div>
+      <input type="submit" value="Sign Up" name="submit">
+    </div>
+    </form>
+</div>
+<div class="bg"><br>
+<span class="name">
+    Welcome <strong><?php echo $username; ?>!</strong>
+    </span>
+    <div class="box-1">
+   <h1 class="heading">Eminent World</h1>
+
+
+  <button class="btn" onclick="showsignupmodal()">Sign Up</button>
+   
+</div>
+</div>
+<br><br><br>
+<div class="sub-box">
+    <div class="container2">
+    
+     <div class="image">
+      <img src="https://i.redd.it/moc1jb4v86a11.jpg" alt="" width="700px" >
+      
+    </div>
+     <div class="text">
+        <h1 class="sub-heading" >Mountains</h1>
+        <p>
+           
+            Mountains stand as majestic giants, their peaks reaching towards the heavens, their slopes etched with the passage of time. They are nature's fortresses, ancient and enduring, shaping landscapes and influencing climates.
+            
+            Each mountain range tells a story of geological upheaval, their rocky spines formed over millions of years through tectonic clashes and weathering. From the snow-capped peaks of the Himalayas to the rugged Appalachians, mountains command awe and respect. They harbor unique ecosystems, from alpine meadows to dense forests, hosting a diverse array of flora and fauna adapted to their challenging environments.
+            
+            Mountains provide crucial resources to human societies, offering freshwater through their rivers and streams, minerals from their depths, and a canvas for adventure and spiritual reflection. They challenge human ingenuity, attracting climbers and explorers seeking to conquer their heights and unlock their mysteries.
+            
+         Mountains endure as symbols of resilience and grandeur, reminding us of the Earth's natural wonders and the importance of conservation. They inspire us with their beauty and compel us to protect them for coming future to cherish.
+        </p>
+        <button class="p-button"><a href="details.html">Discover</a></button>
+     </div>
+    </div>
+    <br><br>
+ 
+        <div class="container2">
+         <div class="text">
+            <h1 class="sub-heading" >Rivers</h1>
+            <p>Rivers are nature's liquid lifelines, meandering through landscapes with grace and purpose, shaping the very land they traverse. From their humble beginnings as mountain springs or rain-fed streams, rivers gather momentum and volume, carving valleys and canyons in their determined journey to the sea.
+
+                Their beauty lies in their diversity: from serene, winding channels reflecting the sky like mirrors, to raging torrents cascading over rocks in wild displays of energy. Rivers harbor a wealth of life, from delicate aquatic plants to elusive fish and playful otters. Along their banks, lush vegetation thrives, providing habitats for countless species of birds and mammals.
+                 They connect communities and cultures, serving as highways for trade and communication since ancient times.
+                
+                Each river tells a story of resilience, adapting to changing landscapes and climates while sustaining ecosystems and human societies alike. Their waters sustain agriculture, industry, and recreation, offering moments of tranquility and exhilaration to all who seek their embrace.
+    </p>
+    <button class="p-button"><a href="details2.html">Discover</a></button>
+         </div>
+         <div class="image1">
+            <img src="https://th.bing.com/th/id/OSK.HEROmcWhdCz_lk1IDS2owi44YB8_eF4WWyK50retv29RWJc?rs=1&pid=ImgDetMain" alt="" width="700px" >
+            
+          </div>
+        </div>
+
+        <div class="container2">
+            <div class="image three">
+             <img src="https://media.gettyimages.com/id/942152116/photo/thar-desert-jaisalmer-rajasthan-india-at-sunset-with-moody-sky.jpg?b=1&s=170667a&w=0&k=20&c=UvXDrW0teIgW-Jvyb4rYgaXoLdE4pf-bYBmoQs7_5ZQ=" alt="" width="700px" >
+             
+           </div>
+            <div class="text">
+               <h1 class="sub-heading" >Deserts</h1>
+               <p>LThe desert, a landscape of extremes, captivates with its stark beauty and unforgiving terrain. Characterized by vast expanses of arid land, deserts challenge life to adapt in extraordinary ways. Their landscapes range from endless sand dunes rippled by the wind to rocky plateaus and salt flats that shimmer under the relentless sun.
+
+                Life in the desert thrives in unexpected places: hardy succulents like cacti store water within their fleshy stems, while nocturnal creatures like the desert fox and kangaroo rat emerge under the cool blanket of night. Adaptation is key in this harsh environment where temperatures swing dramatically between scorching days and freezing nights.
+                
+                Deserts inspire with their solitude and silence, offering vistas where the horizon seems infinite and time slows to a contemplative pace. 
+                Despite their challenges, deserts hold a fragile beauty that is both resilient and delicate. They remind us of nature's ability to thrive in adversity and encourage us to appreciate the resilience of life in all its forms.The desert's allure extends beyond its physical attributes; it embodies a sense of mystique and introspection. Its vastness invites introspection, offering a canvas where the human spirit can find solace and inspiration amidst the austere beauty. .
+             </p>
+             <button class="p-button"><a href="details3.html">Discover</a></button>
+            </div>
+           </div>
+           <br><br>
+</div>
+
+</body>
+<script>
+ 
+    function showModal(){
+        //   document.querySelector('.overlay').classList.add('showoverlay');
+          document.querySelector('.login-form').classList.add('showloginform');
+}
+    function closeModal(){
+        //   document.querySelector('.overlay').classList.remove('showoverlay');
+          document.querySelector('.login-form').classList.remove('showloginform');
+}
+
+var c=document.querySelector(".span1");
+c.addEventListener("click",closeModal);
+
+function showsignupmodal(){
+        document.querySelector('.sign-form').classList.add('showloginform');
+    }
+
+    function closeModalsign(){
+        //   document.querySelector('.overlay').classList.remove('showoverlay');
+          document.querySelector('.sign-form').classList.remove('showloginform');
+}
+var d=document.querySelector(".span2");
+d.addEventListener("click",closeModalsign);
+
+
+
+
+function validateForm() {
+            // Fetching values from all input fields and storing them in variables
+            var username = document.forms["signupForm"]["username"].value;
+            var email = document.forms["signupForm"]["email"].value;
+            var password = document.forms["signupForm"]["password"].value;
+
+            // Check if username is empty
+            if (username == "") {
+                alert("Username must be filled out");
+                return false;
+            }
+
+            // Check if email is empty
+            if (email == "") {
+                alert("Email must be filled out");
+                return false;
+            }
+
+            // Check if email format is valid (simple check)
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert("Invalid email address");
+                return false;
+            }
+
+            // Check if password is empty
+            if (password == "") {
+                alert("Password must be filled out");
+                return false;
+            }
+
+            // Check if password meets minimum length (example: at least 6 characters)
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long");
+                return false;
+            }
+
+            // If all validation passes, the form will submit
+            return true;
+        }
+
+   
+
+ 
+  
+
+
+</script>
+</html>
